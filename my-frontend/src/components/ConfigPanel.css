@@ -1,0 +1,123 @@
+.config-side-backdrop {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+}
+
+.config-side-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 350px;
+  height: 100%;
+  background: #fff;
+  box-shadow: -3px 0 8px rgba(0,0,0,0.2);
+  z-index: 1001;
+  animation: slideIn 0.3s ease-out forwards;
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+.config-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px 5px 20px;
+  border-bottom: 1px solid #eee;
+}
+
+h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  color: #333;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: #666;
+}
+
+.close-btn:hover {
+  color: #000;
+}
+
+.subtext {
+  font-size: 0.85rem;
+  color: #777;
+  margin: 10px 20px;
+}
+
+.config-list {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 10px;
+  padding: 0 20px;
+}
+
+.config-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 4px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  margin-bottom: 6px;
+  background: #fafafa;
+  cursor: grab;
+  transition: background 0.2s ease;
+}
+
+.config-item:hover {
+  background: #f0f0f0;
+}
+
+.drag-handle {
+  cursor: grab;
+  font-size: 1.2rem;
+  color: #999;
+  width: 20px;
+  text-align: center;
+}
+
+.config-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 10px 20px;
+  border-top: 1px solid #eee;
+  background: #fff;
+  position: sticky;
+  bottom: 0;
+}
+
+.save-btn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.cancel-btn {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.save-btn:hover {
+  background-color: #45a049;
+}
+.cancel-btn:hover {
+  background-color: #e53935;
+}

@@ -1,0 +1,34 @@
+import sys
+import os
+
+# Add the parent directory to sys.path
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+import asyncio
+from elasticsearch import AsyncElasticsearch, helpers
+from app.database import AsyncSessionLocal
+from app.models import User
+
+es = AsyncElasticsearch(
+    "http://localhost:9200",
+    request_timeout=60,
+    headers={
+        "Accept": "application/vnd.elasticsearch+json; compatible-with=8",
+        "Content-Type": "application/vnd.elasticsearch+json; compatible-with=8"
+    }
+)
+
+async def sync_to_es():
+    async with AsyncSessionLocal() as session:
+        result = await session.execute(User.__table__.select())
+        users = result.fetchall()
+
+        for row in users:
+            user = dict(row._mapping)
+            await es.index(index="employees", id=user["id"], document=user)
+
+        print(f"✅ Synced {len(users)} users to Elasticsearch")
+
+
+if __name__ == "__main__":
+    asyncio.run(sync_to_es())
